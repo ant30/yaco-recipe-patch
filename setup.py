@@ -5,6 +5,7 @@ This module contains the tool of yaco.recipe.patch
 import os
 from setuptools import setup, find_packages
 
+
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
@@ -18,25 +19,25 @@ long_description = (
     + '\n' +
     read('yaco', 'recipe', 'patch', 'README.txt')
     + '\n' +
-    'Contributors\n' 
+    'Contributors\n'
     '************\n'
     + '\n' +
     read('CONTRIBUTORS.txt')
     + '\n' +
     'Change history\n'
     '**************\n'
-    + '\n' + 
+    + '\n' +
     read('CHANGES.txt')
     + '\n' +
    'Download\n'
-    '********\n'
-    )
-entry_point = 'yaco.recipe.patch:Recipe'
-entry_points = {"zc.buildout": ["default = %s" % entry_point]}
+    '********\n')
+
+name='yaco.recipe.patch'
+entry_point = '%s:Recipe' % name
 
 tests_require=['zope.testing', 'zc.buildout']
 
-setup(name='yaco.recipe.patch',
+setup(name=name,
       version=version,
       description="Yet, another buildout recipe for patching",
       long_description=long_description,
@@ -47,8 +48,8 @@ setup(name='yaco.recipe.patch',
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: LGPL',
         ],
-      keywords='',
-      author='',
+      keywords='buildout patch',
+      author=('Antonio Pérez-Aranda Alcaide'),
       author_email='ant30tx at gmail.com',
       url='http://github.com/ant30/yaco-recipe-patch',
       license='LGPL',
@@ -57,11 +58,12 @@ setup(name='yaco.recipe.patch',
       include_package_data=True,
       zip_safe=False,
       install_requires=['setuptools',
-                        'zc.buildout'
-                        # -*- Extra requirements: -*-
+                        'zc.buildout',
                         ],
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),
       test_suite = 'yaco.recipe.patch.tests.test_docs.test_suite',
-      entry_points=entry_points,
+      entry_points = {"zc.buildout": ["default = %s" % entry_point],
+                    "zc.buildout.uninstall": ["default = %s:uninstall_recipe" % name],
+                    },
       )

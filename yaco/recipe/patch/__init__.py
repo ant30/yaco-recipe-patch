@@ -30,35 +30,40 @@ class Recipe(object):
         patch -d basedirectory -N -i patch.patch
         patch --directory basedirectory --forward -input patch.patch
         """
-        patchcommand = [self.binarypatch,
-                            '-p0',
-                            '--forward',
-                            '--reject-file', '-', # Don't create reject file
-                            '--directory', self.options['patchlocation'],
-                            '--input', self.options['patch'],
-                       ]
-        logger.info(' '.join(patchcommand))
-        applying = Popen(patchcommand, stdin=PIPE, stdout=PIPE, stderr=STDOUT)
-        [logger.info(line) for line in applying.stdout.readlines()]
-        if not (applying.returncode is None or applying.returncode == 0):
+        returncode = self.run_patch_command()
+        if not (returncode is None or returncode == 0):
             raise zc.buildout.UserError('could not apply %s' % self.options['patch'])
 
     def reverse_patch(self):
+        returncode = self.run_patch_command(revert=True)
+        if not (returncode is None or returncode == 0):
+            raise zc.buildout.UserError('could not revert patch %s' % self.options['patch'])
+
+    def run_patch_command(self, revert=False):
+        if revert:
+            cmd = '--reverse'
+        else:
+            cmd = '--forward'
         patchcommand =[self.binarypatch,
                             '-p0',
-                            '--reverse',
+                            cmd,
                             '--reject-file', '-', # Don't create reject file
                             '--directory', self.options['patchlocation'],
                             '--input', self.options['patch'],
                        ]
         logger.info(' '.join(patchcommand))
-        applying = Popen(patchcommand,
+        patcher = Popen(patchcommand,
                          stdin=PIPE, stdout=PIPE, stderr=STDOUT)
-        [logger.info(line) for line in applying.stdout.readlines()]
-        if applying.returncode != 0:
-            raise zc.buildout.UserError('could not reverse patch %s' % self.options['patch'])
+        [logger.info(line.replace('\n','')) for line in patcher.stdout.readlines()]
+        return patcher.returncode
 
     def update(self):
         """Updater"""
         self.reverse_patch()
         self.apply_patch()
+
+
+def uninstall_recipe(name, options):
+    """ Try to reverse patch on uninstall """
+    recipe = Recipe(None, name, options)
+    recipe.reverse_patch()
