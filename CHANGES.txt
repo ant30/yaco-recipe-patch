@@ -1,9 +1,15 @@
-0.1 (2010-07-23)
+0.3 (2010-07-23)
 ----------------
 
-- Created recipe with ZopeSkel
+- Fix rst doc
+
 
 0.2 (2010-07-23)
 ----------------
 
 - Patch and reverse patch on uninstall, fix doc
+
+0.1 (2010-07-23)
+----------------
+
+- Created recipe with ZopeSkel

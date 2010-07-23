@@ -1,7 +1,7 @@
-.. contents::
+yaco.recipe.patch
+=================
 
-.. Note to recipe author!
-   ---------------------
+.. contents::
 
 
 - Code repository: git://github.com/ant30/yaco-recipe-patch.git

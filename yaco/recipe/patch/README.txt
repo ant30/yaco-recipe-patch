@@ -1,6 +1,3 @@
-.. contents::
-
-
 Supported options
 =================
 
