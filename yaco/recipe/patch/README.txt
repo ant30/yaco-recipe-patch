@@ -1,3 +1,6 @@
+.. contents::
+
+
 Supported options
 =================
 
@@ -15,23 +18,6 @@ binary-patch
 
 Example usage
 =============
-
-.. Note to recipe author!
-   ----------------------
-   zc.buildout provides a nice testing environment which makes it
-   relatively easy to write doctests that both demonstrate the use of
-   the recipe and test it.
-   You can find examples of recipe doctests from the PyPI, e.g.
-   
-     http://pypi.python.org/pypi/zc.recipe.egg
-
-   The PyPI page for zc.buildout contains documentation about the test
-   environment.
-
-     http://pypi.python.org/pypi/zc.buildout#testing-support
-
-   Below is a skeleton doctest that you can start with when building
-   your own tests.
 
 We'll start by creating a buildout that uses the recipe::
 
