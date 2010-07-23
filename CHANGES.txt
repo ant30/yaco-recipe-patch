@@ -2,4 +2,8 @@
 ----------------
 
 - Created recipe with ZopeSkel
-  [""]
+
+0.2 (2010-07-23)
+----------------
+
+- Patch and reverse patch on uninstall, fix doc
