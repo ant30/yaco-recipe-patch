@@ -59,8 +59,9 @@ class Recipe(object):
 
     def update(self):
         """Updater"""
-        self.reverse_patch()
-        self.apply_patch()
+        pass
+        # self.reverse_patch()
+        # self.apply_patch()
 
 
 def uninstall_recipe(name, options):
