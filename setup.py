@@ -9,15 +9,13 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.3'
+version = '0.3.2.1'
 
 long_description = (
-    read('README.txt')
-    + '\n' +
     'Detailed Documentation\n'
     '**********************\n'
     + '\n' +
-    read('yaco', 'recipe', 'patch', 'README.txt')
+    read('README.txt')
     + '\n' +
     'Contributors\n'
     '************\n'
